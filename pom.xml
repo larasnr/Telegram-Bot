@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.3</version>
+    <relativePath/> <!-- usa BOM de Spring Boot -->
+  </parent>
+
+  <groupId>ar.edu.utn.dds.k3003</groupId>
+  <artifactId>ui-bot</artifactId>
+  <version>1.0.0</version>
+  <name>ui-bot</name>
+  <description>Bot de Telegram para DDS Fuentes</description>
+
+  <properties>
+    <java.version>17</java.version>
+    <telegrambots.version>6.9.7.1</telegrambots.version>
+  </properties>
+
+  <dependencies>
+    <!-- Core de Spring Boot (app consola) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- WebClient (reactivo) para llamar a tus servicios -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+
+    <!-- Telegram Bot API -->
+    <dependency>
+      <groupId>org.telegram</groupId>
+      <artifactId>telegrambots</artifactId>
+      <version>${telegrambots.version}</version>
+    </dependency>
+
+    <!-- (Opcional) Para Mac: evita el warning de DNS de Netty.
+         Elegí el classifier que corresponda a tu Mac.
+         Si sos Apple Silicon (M1/M2/M3): osx-aarch_64  -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-resolver-dns-native-macos</artifactId>
+      <version>4.1.110.Final</version>
+      <classifier>osx-aarch_64</classifier>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <!-- Si sos Intel: descomentá esto y comentá el de arriba
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-resolver-dns-native-macos</artifactId>
+      <version>4.1.110.Final</version>
+      <classifier>osx-x86_64</classifier>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Empaqueta un fat-jar ejecutable -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>ar.edu.utn.dds.k3003.model.Application</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
